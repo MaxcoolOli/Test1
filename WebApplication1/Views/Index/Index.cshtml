@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div>
+        limit：<input type="text" name="limit" id="limit" />
+        offset：<input type="text" name="offset" id="offset" />
+        <input type="button" value="Send" onclick="post()" />
+    </div>
+    <label id="res"></label>
+</body>
+</html>
+
+<script>
+    function post() {
+        var limit = $('#limit').val();
+        var offset = $('#offset').val();
+
+        $.ajax({
+            url: '@Url.Action("Weather", "Index")',
+            data: { "limit": limit, "offset": offset },
+            contentType: "application/json; charset=utf-8",
+            dataType: 'text',
+            success: function (msg) {
+                $('#res').text(msg);
+            }
+        })
+
+    }
+
+</script>
